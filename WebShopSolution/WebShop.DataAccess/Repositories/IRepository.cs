@@ -1,4 +1,4 @@
-﻿namespace WebShop.Repositories;
+﻿namespace WebShop.DataAccess.Repositories;
 
 public interface IRepository<T> where T : class
 {

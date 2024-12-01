@@ -1,4 +1,4 @@
-namespace WebShop
+namespace WebShop.DataAccess.Entities
 {
     // Produktmodellen representerar en produkt i webbshoppen
     public class Product

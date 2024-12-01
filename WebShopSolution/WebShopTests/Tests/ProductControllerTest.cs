@@ -1,9 +1,8 @@
-using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
-using WebShop;
 using WebShop.Controllers;
-using WebShop.Repositories;
+using WebShop.DataAccess.Entities;
+using WebShop.DataAccess.Repositories;
 using WebShop.UnitOfWork;
 
 namespace WebShopTests.Tests;

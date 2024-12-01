@@ -1,7 +1,6 @@
-using Microsoft.EntityFrameworkCore;
 using Moq;
-using WebShop;
 using WebShop.DataAccess;
+using WebShop.DataAccess.Entities;
 using WebShop.Notifications;
 using WebShop.UnitOfWork;
 

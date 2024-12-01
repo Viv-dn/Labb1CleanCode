@@ -1,8 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.VisualBasic.CompilerServices;
-using WebShop.DataAccess;
 
-namespace WebShop.Repositories
+namespace WebShop.DataAccess.Repositories
 {
     public class Repository<T> : IRepository<T> where T : class
     {

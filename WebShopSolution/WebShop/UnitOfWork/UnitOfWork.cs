@@ -1,7 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
-using WebShop.DataAccess;
+﻿using WebShop.DataAccess;
+using WebShop.DataAccess.Entities;
+using WebShop.DataAccess.Repositories;
 using WebShop.Notifications;
-using WebShop.Repositories;
 
 namespace WebShop.UnitOfWork
 {

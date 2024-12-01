@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using WebShop.DataAccess;
+using WebShop.DataAccess.Entities;
 
-namespace WebShop.Repositories;
+namespace WebShop.DataAccess.Repositories;
 
 public class ProductRepository : Repository<Product>, IProductRepository
 {
