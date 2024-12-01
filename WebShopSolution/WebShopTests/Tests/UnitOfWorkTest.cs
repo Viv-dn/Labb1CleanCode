@@ -10,7 +10,7 @@ namespace WebShopTests.Tests
     {
         //private readonly DbContextOptions<WebShopDbContext> _context;
         private readonly WebShopDbContext _context;
-        private readonly IUnitOfWork _unitOfWork;
+        //private readonly IUnitOfWork _unitOfWork;
 
         public UnitOfWorkTests(WebShopDbContext context)
         {
@@ -31,7 +31,7 @@ namespace WebShopTests.Tests
             productSubject.Attach(mockObserver.Object);
 
             // Injicerar vårt eget ProductSubject i UnitOfWork
-            var unitOfWork = new UnitOfWork(productSubject);
+            var unitOfWork = new UnitOfWork(productSubject, _context);
 
             // Act
             unitOfWork.NotifyProductAdded(product);

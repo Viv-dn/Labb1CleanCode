@@ -5,7 +5,7 @@ namespace WebShop.DataAccess.Repositories;
 
 public class ProductRepository : Repository<Product>, IProductRepository
 {
-    private readonly WebShopDbContext _context;
+    //private readonly WebShopDbContext _context;
     private readonly DbSet<Product> _entity;
 
     public ProductRepository(WebShopDbContext context) : base(context)

@@ -16,15 +16,17 @@ namespace WebShop.UnitOfWork
         
         
         // Konstruktor används för tillfället av Observer pattern
-        public UnitOfWork(ProductSubject productSubject)
+        public UnitOfWork(ProductSubject productSubject, WebShopDbContext context)
         {
-            Products = new ProductRepository(_context);
+            _context = context;
+            Products = new ProductRepository(context);
 
             // Om inget ProductSubject injiceras, skapa ett nytt
             _productSubject = productSubject ?? new ProductSubject();
 
             // Registrera standardobservatörer
             _productSubject.Attach(new EmailNotification());
+            
         }
 
         public void NotifyProductAdded(Product product)
