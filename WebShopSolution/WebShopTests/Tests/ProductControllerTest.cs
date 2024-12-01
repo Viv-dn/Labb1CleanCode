@@ -35,7 +35,7 @@ public class ProductControllerTest
         var result = _controller.GetProducts();
 
         // Assert
-        var goodResult = Assert.IsType<OkObjectResult>(result.Result);
+        var goodResult = Assert.IsType<ActionResult<List<Product>>>(result);
         var resultProduct = Assert.IsType<List<Product>>(goodResult.Value);
         Assert.Equal(2, resultProduct.Count);
     }
@@ -44,9 +44,14 @@ public class ProductControllerTest
     public void AddProduct_ReturnsOkResult()
     {
         // Arrange
+        var product = new Product { Name = "Vitsippa" };
 
         // Act
+        var result = _controller.AddProduct(product);
 
         // Assert
+        var goodResult = Assert.IsType<OkResult>(result);
+        _mockProductRepository.Verify(repository => repository.Add(It.Is<Product>(p => p.Name == "Vitsippa")), Times.Once);
+        Assert.Equal("Vitsippa", product.Name);
     }
 }
