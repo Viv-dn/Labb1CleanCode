@@ -1,10 +1,23 @@
+using Microsoft.EntityFrameworkCore;
 using Moq;
+using WebShop;
+using WebShop.DataAccess;
 using WebShop.Notifications;
+using WebShop.UnitOfWork;
 
-namespace WebShop.Tests
+namespace WebShopTests.Tests
 {
     public class UnitOfWorkTests
     {
+        //private readonly DbContextOptions<WebShopDbContext> _context;
+        private readonly WebShopDbContext _context;
+        private readonly IUnitOfWork _unitOfWork;
+
+        public UnitOfWorkTests(WebShopDbContext context)
+        {
+            _context = context;
+        }
+
         [Fact]
         public void NotifyProductAdded_CallsObserverUpdate()
         {
@@ -19,7 +32,7 @@ namespace WebShop.Tests
             productSubject.Attach(mockObserver.Object);
 
             // Injicerar vårt eget ProductSubject i UnitOfWork
-            var unitOfWork = new UnitOfWork.UnitOfWork(productSubject);
+            var unitOfWork = new UnitOfWork(productSubject);
 
             // Act
             unitOfWork.NotifyProductAdded(product);

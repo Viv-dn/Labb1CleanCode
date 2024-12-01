@@ -1,19 +1,24 @@
-﻿using WebShop.Notifications;
+﻿using Microsoft.EntityFrameworkCore;
+using WebShop.DataAccess;
+using WebShop.Notifications;
 using WebShop.Repositories;
 
 namespace WebShop.UnitOfWork
 {
     public class UnitOfWork : IUnitOfWork
     {
+        private readonly WebShopDbContext _context;
+        private readonly ProductSubject _productSubject;
+        
+
         // Hämta produkter från repository
         public IProductRepository Products { get; private set; }
-
-        private readonly ProductSubject _productSubject;
-
+        
+        
         // Konstruktor används för tillfället av Observer pattern
-        public UnitOfWork(ProductSubject productSubject = null)
+        public UnitOfWork(ProductSubject productSubject)
         {
-            Products = null;
+            Products = new ProductRepository(_context);
 
             // Om inget ProductSubject injiceras, skapa ett nytt
             _productSubject = productSubject ?? new ProductSubject();

@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
+using WebShop.DataAccess;
+using WebShop.Repositories;
 using WebShop.UnitOfWork;
 
 namespace WebShop.Controllers
@@ -7,8 +9,13 @@ namespace WebShop.Controllers
     [Route("api/[controller]")]
     public class ProductController : ControllerBase
     {
-        public ProductController()
+        private readonly WebShopDbContext _context;
+        private readonly IUnitOfWork _unitOfWork;
+
+        public ProductController(IUnitOfWork unitOfWorkRepo, WebShopDbContext context)
         {
+            _unitOfWork = unitOfWorkRepo;
+            _context = context;
         }
 
         // Endpoint för att hämta alla produkter
@@ -16,7 +23,8 @@ namespace WebShop.Controllers
         public ActionResult<IEnumerable<Product>> GetProducts()
         {
             // Behöver använda repository via Unit of Work för att hämta produkter
-            return Ok();
+            var prods = _unitOfWork.Products.GetAll();
+            return Ok(prods);
         }
 
         // Endpoint för att lägga till en ny produkt
@@ -24,11 +32,13 @@ namespace WebShop.Controllers
         public ActionResult AddProduct(Product product)
         {
             // Lägger till produkten via repository
+            _unitOfWork.Products.Add(product);
 
             // Sparar förändringar
+            _context.SaveChanges();
 
             // Notifierar observatörer om att en ny produkt har lagts till
-
+            _unitOfWork.NotifyProductAdded(product);
             return Ok();
         }
     }
